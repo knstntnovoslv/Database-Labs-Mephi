@@ -1,0 +1,11 @@
+DELETE FROM album;
+DELETE FROM artist;
+DELETE FROM concert;
+DELETE FROM expenditure;
+DELETE FROM expenditure_types;
+DELETE FROM genre;
+DELETE FROM platform;
+DELETE FROM profit;
+DELETE FROM profit_types;
+DELETE FROM song;
+DELETE FROM song_platform;
