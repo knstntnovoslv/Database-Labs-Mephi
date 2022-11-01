@@ -2,6 +2,8 @@
 -- OIDS используется в качестве первичных ключей для таблиц(беззнаковое 4-байтовое число)
 -- Он выключён по умолчанию с 9+ версии PostgreSQL
 
+SET lc_monetary TO "ru_RU.UTF-8";
+
 CREATE TABLE IF NOT EXISTS artist (
     -- Задание полей таблицы
 	id SERIAL NOT NULL,
@@ -152,6 +154,10 @@ CREATE TABLE IF NOT EXISTS song_platform (
     -- Задание полей таблицы
 	song_id INTEGER NOT NULL,
 	platform_id INTEGER NOT NULL,
+	auditions_times INTEGER NOT NULL,
+	-- Задание ограничений целостности(с установкой имени ограничений)
+	CONSTRAINT song_platform_pk PRIMARY KEY (song_id, platform_id),
+	CONSTRAINT positive_auditions_times CHECK (auditions_times > 0),
 	-- Задание внешних ключей
     CONSTRAINT song_platform_fk0 FOREIGN KEY (song_id) REFERENCES song(id),
     CONSTRAINT song_platform_fk1 FOREIGN KEY (platform_id) REFERENCES platform(id)
