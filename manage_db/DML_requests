@@ -1,0 +1,33 @@
+1) Выводит список всех артистов (имя + никнейм) вместе с названиями всех альбомов
+
+SELECT Artist.name, Artist.nickname, Album.name FROM Artist JOIN Song ON Artist.id = Song.artist_id JOIN Album ON Song.album_id = Album.id
+
+
+2) Выводит имена артистов и коэф (множитель) их прибыли с платформы, у которых множитель прибыли с платформы больше половины. Имена выводятся по убыванию множителя.
+
+SELECT Artist.name, Artist.multiplier_platform FROM Artist WHERE Artist.multiplier_platform > 50 ORDER BY Artist.multiplier_platform DESC
+
+
+3) Для всех концертов в Москве выводит дату этого концерта, а также имя и никнейм артиста, выступающего на этом концерте.
+
+SELECT Artist.name, Artist.nickname, Concert.concert_date FROM Concert JOIN Artist ON Concert.artist_id = Artist.id WHERE Concert.city = 'Moscow'
+
+
+4) Выводит количество жанров для каждого артиста.
+
+SELECT Artist.name, COUNT(Genre.id) FROM Artist JOIN Song ON Artist.id = Song.artist_id JOIN Genre ON Song.genre_id = Genre.id GROUP BY Artist.name
+
+
+5) Для песни с id 1 выводит максимальную сумму, которую платит платформа за прослушивание.
+
+SELECT MAX(Platform.amount) FROM Platform WHERE Platform.name = (SELECT Platform.name FROM Platform JOIN Song_platform ON Platform.id = Song_platform.platform_id WHERE Song_platform.song_id = 1)
+
+
+6) Выводит города, в которых были концерты у определенного артиста. Артист определяется по имени.
+
+SELECT Concert.City FROM Concert JOIN Artist ON Concert.artist_id = Artist.id WHERE Artist.name = '...'
+
+
+7) Выводит все жанры песен определенног артиста. Артист определяется по имени.
+
+SELECT Genre.name FROM Genre JOIN Song ON Genre.id = Song.genre_id JOIN Artist ON Song.artist_id = Artist.id WHERE Artist.name = '...'
